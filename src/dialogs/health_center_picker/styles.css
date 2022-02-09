@@ -1,0 +1,6 @@
+.healthcenter-picker-dialog{
+    flex-direction: column;
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+}

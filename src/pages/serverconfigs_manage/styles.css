@@ -1,0 +1,7 @@
+.medical-services-container{
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+    max-width: 70vw;
+    margin-top: 10px;
+}

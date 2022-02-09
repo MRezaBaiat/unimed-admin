@@ -1,0 +1,9 @@
+.panel-button{
+    width: available;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    color: white;
+    text-align: right;
+    border-bottom: 1px solid black;
+}

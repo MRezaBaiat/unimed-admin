@@ -1,0 +1,114 @@
+:root{
+  font-family: 'title-font', Arial, sans-serif;
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Comic Sans MS';
+  src: url("./assets/fonts/comici.ttf");
+}
+
+@font-face {
+  font-family: 'regular2';
+  src: url("./assets/fonts/IRANSansMobile(FaNum).ttf");
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url("./assets/fonts/HelveticaNeue.ttf");
+}
+
+@font-face {
+  font-family: 'title-font';
+  src: url("./assets/fonts/IRANSansMobile(FaNum).ttf");
+}
+
+@font-face {
+  font-family: 'subtitle-font';
+  src: url("./assets/fonts/IRANSansMobile(FaNum).ttf");
+}
+
+div{
+  display: flex;
+  flex-direction: column;
+  outline: none;
+}
+
+.section{
+  width: var(--body-width);
+  height: var(--body-height);
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  flex-direction: row;
+}
+
+.center{
+  align-items: center;
+  justify-content: center;
+}
+
+.left{
+  flex:1;
+  width: 100%;
+}
+
+.right{
+  flex:1;
+  width: 100%;
+}
+
+.title{
+  font-size: 3em;
+  color: var(--jade);
+  font-family: Helvetica Neue, Arial, sans-serif;
+  font-weight: bold;
+}
+
+.medium{
+  font-size: 30px;
+  color: var(--jade);
+  font-family: Helvetica Neue, Arial, sans-serif;
+}
+
+.text{
+  font-size: 17px;
+  color: white;
+  font-family:"Open Sans",sans-serif;
+}
+
+.white{
+  color: white;
+}
+
+a{
+  color: var(--jade)
+}
+button{
+  font-family: 'Ubuntu', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
+}
