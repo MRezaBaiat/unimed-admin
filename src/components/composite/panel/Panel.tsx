@@ -95,7 +95,7 @@ export default function Panel (props: Props) {
   const brand = (
     <div className={classes.logo} style={{ width: '100%', alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
         <AppImageView src={arm} className={classes.img} />
-        <AppTextView text={'MATAP'} textColor={'white'} style={{ marginRight: 10 }}/>
+        <AppTextView text={'UNIMED'} textColor={'white'} style={{ marginRight: 10 }}/>
     </div>
   );
   return (

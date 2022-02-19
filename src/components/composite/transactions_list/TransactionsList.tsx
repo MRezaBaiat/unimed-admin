@@ -3,17 +3,12 @@ import { QueryResponse, Transaction, TransactionType } from 'api';
 import GridContainer from '../../base/grid/GridContainer';
 import GridItem from '../../base/grid/GridItem';
 import Card from '../../base/app_card/Card';
-import CardHeader from '../../base/app_card/CardHeader';
 import CardBody from '../../base/app_card/CardBody';
 import AppTable from '../../base/app_table/AppTable';
 import styles from '../../../assets/jss/material-dashboard-react/components/listStyles';
 import { makeStyles } from '@material-ui/core/styles';
 import TransactionsApi from '../../../network/TransactionsApi';
 import AppPagination from '../../base/app_pagination/AppPagination';
-import AppButton from '../../base/app_button/AppButton';
-import Search from '@material-ui/icons/Search';
-import AppInput from '../../base/app_input/AppInput';
-import SearchView from '../search_view/SearchView';
 import { formatDateShamsi } from '../../../helpers';
 
 // @ts-ignore
@@ -46,7 +41,7 @@ function TransactionsList (props: Props) {
 
   const columns : any = data.results.map((value) => {
     const columnStyle = { color: getColorForType(value.type) };
-    return { keys: [<text style={columnStyle}>{value.type}</text>, value.amount, value.discount, value.issuer.name, value.target.name, value.tracking_code, formatDateShamsi(value.date)], value };
+    return { keys: [<text style={columnStyle}>{value.type}</text>, value.amount, value.discount, value.issuer.name, value.target.name, value.trackingCode, formatDateShamsi(value.createdAt)], value };
   });
 
   return (

@@ -27,7 +27,7 @@ const logout = () => {
 };
 
 const signIn = async (username:string, password:string): ResponseType<void> => {
-  return Gateway.post('/admin/users/signin', { username, password })
+  return Gateway.post('/api/admin/users/signin', { username, password })
     .then((res) => {
       const { token, admin } = res.data;
       store.dispatch(actionSetAdmin(admin));
@@ -41,7 +41,7 @@ const renewAuth = async (): Promise<void | AxiosResponse<void>> => {
   if (!isAuthenticated()) {
     return;
   }
-  return Gateway.get('/admin/users/signin/renew').then((res) => {
+  return Gateway.get('/api/admin/users/signin/renew').then((res) => {
     const { token, admin } = res.data;
     store.dispatch(actionSetAdmin(admin));
     localStorage.setItem('auth' + version, token);

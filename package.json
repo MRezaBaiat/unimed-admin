@@ -1,5 +1,5 @@
 {
-  "name": "matap-admin",
+  "name": "unimed-admin",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -18,15 +18,11 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/pickers": "^3.2.10",
     "@reduxjs/toolkit": "^1.4.0",
-    "@testing-library/jest-dom": "^5.11.5",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "api": "https://rezabaiat:1Professional1@gitlab.com/shekarchian/matap-api.git",
+    "api": "https://github.com/MRezaBaiat/unimed-api",
     "axios": "^0.21.0",
     "classnames": "^2.2.6",
     "console-feed": "^3.2.2",
     "file-saver": "^2.0.2",
-    "google-libphonenumber": "^3.2.19",
     "gulp": "^4.0.2",
     "gulp-append-prepend": "^1.0.8",
     "jalali-react-datepicker": "^1.2.0",
@@ -47,7 +43,6 @@
     "redux": "^4.0.5",
     "smart_managers": "https://github.com/MRezaBaiat/react-native-dev-kit.git",
     "socket.io-client": "2.3.0",
-    "winston": "^3.3.3",
     "xlsx": "^0.16.8"
   },
   "devDependencies": {

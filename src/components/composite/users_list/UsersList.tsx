@@ -41,7 +41,7 @@ function UsersList (props: Props) {
 
   const columns : any = data.results.map((value) => {
     const user = value.user;
-    return { keys: [user.name, user.mobile, user.type, smartDate(user.creationDate).formatJalali(), user.code, String(value.isOnline)], value };
+    return { keys: [user.name, user.mobile, user.type, smartDate(user.createdAt).formatJalali(), user.code, String(value.isOnline)], value };
   });
 
   return (

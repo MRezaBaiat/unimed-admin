@@ -17,6 +17,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { Transaction } from 'api';
 import AppTextView from '../../components/base/app_text/AppTextView';
 import { defaultEmpty } from '../../assets/images';
+import { smartDate } from 'javascript-dev-kit';
 
 const styles = {
   cardCategoryWhite: {
@@ -91,11 +92,11 @@ export default function ManageView (props: Props) {
                   placeholder="مقصد"/>
 
                 <Row
-                  value={transaction.tracking_code}
+                  value={transaction.trackingCode}
                   placeholder="کد رهگیری"/>
 
                 <Row
-                  value={transaction.visit_id}
+                  value={transaction.visitId}
                   placeholder="کد ویزیت"/>
                 {
                   transaction.healthCenter &&
@@ -118,7 +119,7 @@ export default function ManageView (props: Props) {
                     placeholder="سهم مرکز درمانی"/>
                 }
                 <Row
-                  value={transaction.date}
+                  value={smartDate(transaction.createdAt).formatJalali()}
                   placeholder="تاریخ"/>
 
                 <Row

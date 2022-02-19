@@ -15,7 +15,7 @@ import SettingView from '../../components/composite/settings_view/SettingsView';
 import NavigationHelper from '../../helpers/NavigationHelper';
 import UsersApi from '../../network/UsersApi';
 import CreateEditButton from '../../components/composite/privilege_managed_buttons/CreateEditButton';
-import { SmartDate } from 'javascript-dev-kit';
+import { smartDate, SmartDate } from 'javascript-dev-kit';
 
 const styles = {
   cardCategoryWhite: {
@@ -49,7 +49,7 @@ export default function ManageView (props: Props) {
 
   const date = new Date();
   const dayInMillisec = 1 * 24 * 60 * 60 * 1000;
-  const [coupon, setCoupon] = useState(editableItem || { title: '', amount: 0, code: '', per_user_limit: 1, total_usage_limit: 100, start_date: date.getTime(), end_date: date.getTime() + dayInMillisec } as DiscountCoupon);
+  const [coupon, setCoupon] = useState(editableItem || { title: '', amount: 0, code: '', perUserLimit: 1, totalUsageLimit: 100, startDate: smartDate(date.getTime()).toISOString(), endDate: smartDate(date.getTime() + dayInMillisec).toISOString() } as DiscountCoupon);
 
   const create = () => {
     DiscountsApi.createDiscount(coupon)
@@ -75,7 +75,7 @@ export default function ManageView (props: Props) {
       });
   };
 
-  const days = (coupon.end_date - coupon.start_date) / dayInMillisec;
+  const days = (smartDate(coupon.endDate).getTime() - smartDate(coupon.startDate).getTime()) / dayInMillisec;
   console.log(coupon);
 
   return (
@@ -117,13 +117,13 @@ export default function ManageView (props: Props) {
                   onChange={(text) => setCoupon({ ...coupon, amount: Number(text) })}/>
 
                 <Row
-                  value={String(coupon.per_user_limit)}
+                  value={String(coupon.perUserLimit)}
                   placeholder="محدودیت هر کاربر"
                   type={'number'}
                   onChange={(text) => setCoupon({ ...coupon, per_user_limit: Number(text) })}/>
 
                 <Row
-                  value={String(coupon.total_usage_limit)}
+                  value={String(coupon.totalUsageLimit)}
                   placeholder="محدودیت کلی"
                   type={'number'}
                   onChange={(text) => setCoupon({ ...coupon, total_usage_limit: Number(text) })}/>
@@ -132,15 +132,15 @@ export default function ManageView (props: Props) {
                   value={String(days)}
                   placeholder="تعداد روزها"
                   type={'number'}
-                  onChange={(text) => { setCoupon({ ...coupon, end_date: coupon.start_date + (Number(text) * dayInMillisec) }); }}/>
+                  onChange={(text) => { setCoupon({ ...coupon, end_date: coupon.startDate + (Number(text) * dayInMillisec) }); }}/>
 
                 <Row
-                  value={new SmartDate(coupon.start_date).formatJalali()}
+                  value={new SmartDate(coupon.startDate).formatJalali()}
                   placeholder="تاریخ شروع"
                   type={'text'}/>
 
                 <Row
-                  value={new SmartDate(coupon.end_date).formatJalali()}
+                  value={new SmartDate(coupon.endDate).formatJalali()}
                   placeholder="تاریخ پایان"
                   type={'text'}/>
 

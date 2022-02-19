@@ -44,7 +44,7 @@ const MainScreen = () => {
       <AppScrollable className='main-screen-container'>
         <Panel
           routes={routes.filter(s => s.getPermission())}
-          logoText={'MATAP'}
+          logoText={'UNIMED'}
           handleDrawerToggle={() => setMobileOpen(!mobileOpen)}
           open={mobileOpen}
           color={color}

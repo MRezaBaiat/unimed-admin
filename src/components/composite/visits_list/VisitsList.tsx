@@ -59,7 +59,7 @@ function VisitsList (props: Props) {
   const columns : any = data.results.map((value) => {
     value.patient = value.patient || { mobile: 'Deleted User!' };
     value.doctor = value.doctor || { name: 'Deleted User!' };
-    return { keys: [value.receipt?.return_transaction_id ? 'yes' : 'no', value.patient.name ? value.patient.name : value.patient.mobile, value.doctor.name, formatDateShamsi(value.initiate_date), formatDateShamsi(value.start_date), value.state !== VisitStatus.ENDED && value.chatting ? 'CHATTING' : value.state], value };
+    return { keys: [value.receipt?.returnTransactionId ? 'yes' : 'no', value.patient.name ? value.patient.name : value.patient.mobile, value.doctor.name, formatDateShamsi(value.createdAt), formatDateShamsi(value.startDate), value.state !== VisitStatus.ENDED && value.chatting ? 'CHATTING' : value.state], value };
   });
 
   return (
@@ -188,9 +188,9 @@ const Download = ({ userId, searchText }) => {
             'شماره پزشک': value.doctor.mobile,
             پزشک: value.doctor ? value.doctor.name : '',
             وضعیت: value.state,
-            'زمان درخواست': value.initiate_date ? formatDateShamsi(value.initiate_date) : '',
-            'زمان شروع': value.start_date ? formatDateShamsi(value.start_date) : '',
-            'زمان پایان': value.end_date ? formatDateShamsi(value.end_date) : '',
+            'زمان درخواست': value.createdAt ? formatDateShamsi(value.createdAt) : '',
+            'زمان شروع': value.startDate ? formatDateShamsi(value.startDate) : '',
+            'زمان پایان': value.endDate ? formatDateShamsi(value.endDate) : '',
             هزینه: value.receipt ? value.receipt.total || 0 : ''
           };
         });

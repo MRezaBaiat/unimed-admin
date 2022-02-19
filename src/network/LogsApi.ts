@@ -20,8 +20,8 @@ const config: SocketIOClient.ConnectOpts = {
     videoCallVersion: 3
   }
 };
-// @ts-ignore
-const socket = io('https://www.matap.site', config);
+
+const socket = io('https://www.azdanaz.az', config);
 socket.on('unauthorized', console.error)
   .on('connect_error', console.error)
   .on('connect_timeout', console.error)
@@ -67,7 +67,7 @@ const getSocket = async () => {
 
 export default class LogsApi {
   public static getAdminLogs (skip:number, limit:number, search?: string): ResponseType<QueryResponse<AdminLog>> {
-    return Gateway.get(`/admin/adminlogs/query?skip=${skip}&limit=${limit}&search=${search}`);
+    return Gateway.get(`/api/admin/adminlogs/query?skip=${skip}&limit=${limit}&search=${search}`);
   }
 
   public static getClientLogs = async (userId: string, types: DebugType[]): Promise<{ stop: ()=>void, setCB: (cb: (event)=>void) =>void, getCB:()=>any }> => {

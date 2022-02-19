@@ -7,13 +7,12 @@ import CardHeader from '../../components/base/app_card/CardHeader';
 import CardBody from '../../components/base/app_card/CardBody';
 import CardFooter from '../../components/base/app_card/CardFooter';
 import { makeStyles } from '@material-ui/core/styles';
-import { MedicalService, ServerConfig } from 'api';
+import { ServerConfig } from 'api';
 import ServerConfigsApi from '../../network/ServerConfigsApi';
 import React, { useEffect, useRef, useState } from 'react';
 import './styles.css';
 import Add from '@material-ui/icons/Add';
 import { Modal } from '@material-ui/core';
-import MedicalServicesApi from '../../network/MedicalServicesApi';
 import CreateEditButton from '../../components/composite/privilege_managed_buttons/CreateEditButton';
 import Checkbox from '@material-ui/core/Checkbox';
 import AppTextView from '../../components/base/app_text/AppTextView';
@@ -150,8 +149,6 @@ function ManageView (props: Props) {
                     <Add />
                   </AppButton>
                 </CardHeader>
-
-                <MedicalServicesView modalVisible={createModalVisible} setModalVisible={setCreateModalVisible}/>
 
               </GridContainer>
             </CardBody>
@@ -316,189 +313,6 @@ const ReservationDateExclusionView = (props: {config: ServerConfig}) => {
         permission={privileges => privileges.serverConfigs}
       />
       </CardFooter>
-    </div>
-  );
-};
-
-const MedicalServicesView = ({ modalVisible, setModalVisible }) => {
-  const [medicalServices, setMedicalServices] = useState([] as MedicalService[]);
-  const [newMedicalService, setNewMedicalService] = useState({} as MedicalService);
-
-  const load = () => {
-    MedicalServicesApi.getMedicalServices().then((res) => {
-      console.log(res.data);
-      setMedicalServices(res.data);
-    }).catch(console.log);
-  };
-
-  useEffect(load, []);
-
-  return (
-    <div>
-      <div className='medical-services-container'>
-        {
-          medicalServices.map((service) => {
-            return <MedicalServiceRow
-              service={service}
-              reload={load}
-              onChange={(obj) => {
-                const newObj = medicalServices.find(s => s._id === obj._id);
-                if (newObj) {
-                  const services = [...medicalServices];
-                  services[services.indexOf(newObj)] = obj;
-                  // console.log(medicalServices)
-                  setMedicalServices(services);
-                }
-              }}
-            />;
-          })
-        }
-      </div>
-
-      <Modal style={{ alignItems: 'center', justifyContent: 'center' }} open={modalVisible} onClose={() => { setModalVisible(false); }}>
-        <div>
-          <MedicalServiceRow
-            service={newMedicalService}
-            mode={'create'}
-            onChange={(obj) => {
-              setNewMedicalService(obj);
-            }}
-            reload={() => {
-              load();
-              setModalVisible(false);
-              setNewMedicalService({} as MedicalService);
-            }}
-          />
-        </div>
-      </Modal>
-
-    </div>
-  );
-};
-
-const MedicalServiceRow = ({ service, reload, onChange, mode = 'edit' }) => {
-  const fileRef = useRef();
-  const [dummy, setDummy] = useState(0);
-  const [psave, setpsave] = useState(0);
-  const [pdelete, setpdelete] = useState(0);
-
-  const success = () => {
-    setpsave(0);
-    setpdelete(0);
-    reload();
-  };
-
-  const error = (e) => {
-    setpsave(0);
-    setpdelete(0);
-    console.log(e);
-  };
-
-  const filePicked = (event) => {
-    event.stopPropagation();
-    event.preventDefault();
-    const file = event.target.files[0];
-    if (mode === 'edit') {
-      MedicalServicesApi.updateMedicalServiceImage(service._id, file).then(reload).catch(console.log);
-    } else {
-      service.logoUrl = file;
-      console.log(file);
-      setDummy(dummy + 1);
-    }
-  };
-
-  const pickFile = () => {
-    // @ts-ignore
-    fileRef.current.click();
-  };
-
-  return (
-    <div style={{ minWidth: '40vw', backgroundColor: 'white', borderWidth: 2, borderColor: '#26c6da', borderStyle: 'solid', borderRadius: 15, padding: 15 }}>
-      <input
-        ref={(ref) => {
-          // @ts-ignore
-          fileRef.current = ref;
-        }}
-        type="file"
-        id="file"
-        style={{ display: 'none' }} onChange={filePicked}/>
-      <a href="#pablo" style={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }} onClick={e => e.preventDefault()}>
-        <img src={service.logoUrl ? typeof service.logoUrl === 'string' ? service.logoUrl : URL.createObjectURL(service.logoUrl) : service.logoUrl} style={{ width: 150 }} alt="تصویر را انتخاب کنید" onClick={pickFile}/>
-      </a>
-      <AppInput
-        placeholder={'Title'}
-        initialvalue={service.title}
-        onChange={(text) => {
-          onChange({
-            ...service,
-            title: text
-          });
-        }}
-      />
-      <AppInput
-        placeholder={'Subtitle'}
-        initialvalue={service.subTitle}
-        onChange={(text) => {
-          onChange({
-            ...service,
-            subTitle: text
-          });
-        }}
-      />
-      <AppInput
-        placeholder={'Price'}
-        type={'number'}
-        initialvalue={service.price}
-        onChange={(text) => {
-          onChange({
-            ...service,
-            price: Number(text)
-          });
-        }}
-      />
-      <AppInput
-        placeholder={'Details'}
-        initialvalue={service.details}
-        multiline={true}
-        onChange={(text) => {
-          onChange({
-            ...service,
-            details: text
-          });
-        }}
-      />
-      <div>
-        <CreateEditButton
-          editableItem={mode === 'edit'}
-          color={'info'}
-          progress={psave}
-          permission={privileges => privileges.serverConfigs}
-          create={() => {
-            const file = service.logoUrl;
-            if (!file) {
-              alert('Please select an image first');
-              return;
-            }
-            const newService = { ...service };
-            // @ts-ignore
-            newService.logoUrl = undefined;
-            setpsave(50);
-            MedicalServicesApi.createMedicalService(newService, file).then(success).catch(error);
-          }}
-          edit={() => {
-            const s = { ...service, logoUrl: undefined };
-            setpsave(50);
-            MedicalServicesApi.patchMedicalService(s._id, s).then(success).catch(error);
-          }}
-        />
-        {
-          mode === 'edit' &&
-              <AppButton progress={pdelete} text={'حذف'} color={'info'} onClick={() => {
-                setpdelete(50);
-                MedicalServicesApi.deleteMedicalService(service._id).then(success).catch(error);
-              }}/>
-        }
-      </div>
     </div>
   );
 };

@@ -56,7 +56,7 @@ function SurveysList (props: Props) {
 
   const columns : any = data.results.map((value) => {
     const { rating } = value;
-    return { keys: [rating.doctor_detailed_consequences + rating.doctor_details_clearity + rating.doctor_solutions + rating.environment_details + rating.service_quality + rating.video_call_satisfaction, value._id], value };
+    return { keys: [rating.doctorDetailedConsequences + rating.doctorDetailsClearity + rating.doctorSolutions + rating.environmentDetails + rating.serviceQuality + rating.videoCallSatisfaction, value._id], value };
   });
 
   return (

@@ -42,7 +42,7 @@ function DiscountsList (props: Props) {
   // @ts-ignore
   const columns : any = data.results.map((value) => {
     const discount: DiscountCoupon = value;
-    return { keys: [discount.title, discount._id, discount.code, discount.amount, discount.end_date, discount.per_user_limit, discount.total_usage_limit], value };
+    return { keys: [discount.title, discount._id, discount.code, discount.amount, discount.endDate, discount.perUserLimit, discount.totalUsageLimit], value };
   });
 
   return (

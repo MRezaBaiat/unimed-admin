@@ -44,7 +44,7 @@ function AccountantYearlyReportsList () {
             monthsDatas[k] = { successful: 0, cancelled: 0 };
           });
           value.visits.forEach((visit) => {
-            const month = smartDate(visit.end_date).jMonth();
+            const month = smartDate(visit.endDate).jMonth();
             console.log(month);
             if (visit.state === VisitStatus.CANCELLED) {
               monthsDatas[month].cancelled += 1;

@@ -24,16 +24,10 @@ import TransactionDetailsScreen from './pages/transaction_details/TransactionDet
 import UserVisitsScreen from './pages/user_visits/UserVisitsScreen';
 import VisitManageScreen from './pages/visit_manage/VisitManageScreen';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
-import createTypography from '@material-ui/core/styles/createTypography';
-import ServiceRequestsManageScreen from './pages/service_requests/ServiceRequestsManageScreen';
-import ServerConfigsManageScreen from './pages/serverconfigs_manage/ServerConfigsManageScreen';
-import AuthService from './services/AuthService';
 import AuthProtectionHoc from './components/composite/auth_protection_hoc/AuthProtectionHoc';
 import AdminManageScreen from './pages/admin_manage/AdminManageScreen';
 import NotificationManageScreen from './pages/notification_manage/NotificationManageScreen';
 import SurveyManageScreen from './pages/survey_manage/SurveyManageScreen';
-import ReservationsManageScreen from './pages/reservations_manage/ReservationsManageScreen';
-import { formatDateShamsi } from './helpers';
 import LogsScreen from './pages/log-screen/LogsScreen';
 import { SmartDate } from 'javascript-dev-kit';
 import CallAnalysisScreen from './pages/call-analysis/CallAnalysisScreen';
@@ -43,9 +37,7 @@ SmartDate.setDefaultTimeZone('utc+03:30');
 // eslint-disable-next-line
 console.log(window.location.protocol + '//' + window.location.hostname);
 
-const env = process.env.NODE_ENV;
-// export const baseUrl = env === 'development' ? 'https://www.matap.site' : (window.location.protocol + '//' + window.location.hostname).replace('admin.', 'www.');
-export const baseUrl = 'https://www.matap.site';
+export const baseUrl = 'https://www.azdanaz.az';
 console.disableYellowBox = true;
 axios.defaults.baseURL = baseUrl;
 axios.defaults.withCredentials = true;
@@ -61,6 +53,7 @@ const THEME = createMuiTheme({
     fontFamily: 'title-font'
   }
 });
+
 ReactDOM.render(
   <React.StrictMode>
   <MuiThemeProvider theme={THEME}>
@@ -76,14 +69,12 @@ ReactDOM.render(
                 <PrivateRoute path={'/discount'} component={DiscountManageScreen}/>
                 <PrivateRoute path={'/healthcenter'} component={HealthCenterManageScreen}/>
                 <PrivateRoute path={'/specialization'} component={SpecializationsManageScreen}/>
-                <PrivateRoute path={'/doctor-reservations'} component={ReservationsManageScreen}/>
                 <PrivateRoute path={'/user-financial'} component={UserFinancialScreen}/>
                 <PrivateRoute path={'/user-visits'} component={UserVisitsScreen}/>
                 <PrivateRoute path={'/transaction'} component={TransactionDetailsScreen}/>
                 <PrivateRoute path={'/visit'} component={VisitManageScreen}/>
                 <PrivateRoute path={'/survey'} component={SurveyManageScreen}/>
                 <PrivateRoute path={'/admins'} component={AdminManageScreen}/>
-                <PrivateRoute path={'/servicerequest'} component={ServiceRequestsManageScreen}/>
                 <PrivateRoute path={'/notification'} component={NotificationManageScreen}/>
                 <PrivateRoute path={'/user-logs'} component={LogsScreen}/>
                 <PrivateRoute path={'/conference-analysis'} component={CallAnalysisScreen}/>

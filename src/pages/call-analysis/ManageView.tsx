@@ -10,6 +10,7 @@ import CardFooter from '../../components/base/app_card/CardFooter';
 import { AbstractCallMetric, CallMetricsEvent, Conference } from 'api';
 import AppTextView from '../../components/base/app_text/AppTextView';
 import { numbersToEnglish } from '../../helpers/Utils';
+import { smartDate } from 'javascript-dev-kit';
 
 const styles = {
   cardCategoryWhite: {
@@ -126,8 +127,8 @@ const renderEvents = (participant, data) => {
   );
 };
 
-const searchEvent = (events: AbstractCallMetric<any>[], before: number, search: CallMetricsEvent[]) => {
-  return events.find(e => search.includes(e.event) && e.timeStamp <= before);
+const searchEvent = (events: AbstractCallMetric<any>[], before: string, search: CallMetricsEvent[]) => {
+  return events.find(e => search.includes(e.event) && smartDate(e.timeStamp).getTime() <= smartDate(before).getTime());
 };
 
 const findBy = (conference: Conference, metric: AbstractCallMetric<any>) => {

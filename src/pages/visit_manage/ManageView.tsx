@@ -16,6 +16,7 @@ import VisitsApi from '../../network/VisitsApi';
 import NavigationHelper from '../../helpers/NavigationHelper';
 import { store } from '../../index';
 import { defaultEmpty } from '../../assets/images';
+import { smartDate } from 'javascript-dev-kit';
 
 const styles = {
   cardCategoryWhite: {
@@ -80,21 +81,21 @@ export default function ManageView (props: Props) {
                   placeholder="بیمار"/>
 
                 <Row
-                  value={formatDateShamsi(visit.initiate_date)}
+                  value={formatDateShamsi(visit.createdAt)}
                   placeholder="تاریخ درخواست"/>
 
                 <Row
-                  value={formatDateShamsi(visit.start_date)}
+                  value={formatDateShamsi(visit.startDate)}
                   placeholder="تاریخ شروع"/>
 
                 <Row
-                    value={formatDateShamsi(visit.end_date)}
+                    value={formatDateShamsi(visit.endDate)}
                     placeholder="تاریخ پایان"/>
 
                 {
                   visit.state === VisitStatus.ENDED &&
                   <Row
-                      value={`${Math.round((visit.end_date - visit.start_date) / 1000 / 60)}` + ' دقیقه '}
+                      value={`${Math.round((smartDate(visit.endDate).getTime() - smartDate(visit.startDate).getTime()) / 1000 / 60)}` + ' دقیقه '}
                       placeholder="مدت زمان"/>
                 }
 
@@ -122,13 +123,13 @@ export default function ManageView (props: Props) {
                       placeholder="تخفیف"/>
 
                     <Row
-                      value={visit.receipt.return_transaction_id ? 'بله' : 'خیر'}
+                      value={visit.receipt.returnTransactionId ? 'بله' : 'خیر'}
                       placeholder="بازگشت هزینه"/>
                   </div>
                 }
 
                 {
-                  (visit.state === VisitStatus.ENDED) && !visit.receipt.return_transaction_id && store.getState().global.admin.privileges.visits.patch &&
+                  (visit.state === VisitStatus.ENDED) && !visit.receipt.returnTransactionId && store.getState().global.admin.privileges.visits.patch &&
                   <AppButton text={'بازگشت هزینه'} color={'danger'} onClick={() => {
                     VisitsApi.returnVisitPayment(visit._id);
                     NavigationHelper.goBack();

@@ -65,23 +65,23 @@ export default function ManageView (props: Props) {
                   placeholder="ID"/>
 
                 <Row
-                  value={visit.rating.doctor_detailed_consequences}
+                  value={visit.rating.doctorDetailedConsequences}
                   placeholder="توضیح در مورد عواقب دارو ها"/>
                 <Row
-                  value={visit.rating.doctor_details_clearity}
+                  value={visit.rating.doctorDetailsClearity}
                   placeholder="وضوح توضیحات دکتر"/>
                 <Row
-                  value={visit.rating.doctor_solutions}
+                  value={visit.rating.doctorSolutions}
                   placeholder="ارایه راه حل ها"/>
                 <Row
-                  value={visit.rating.environment_details}
+                  value={visit.rating.environmentDetails}
                   placeholder="محیط"/>
                 <Row
-                  value={visit.rating.service_quality}
+                  value={visit.rating.serviceQuality}
                   placeholder="کیفیت خدمات"/>
 
                 <Row
-                  value={visit.rating.video_call_satisfaction}
+                  value={visit.rating.videoCallSatisfaction}
                   placeholder="تماس تصویری"/>
 
               </GridContainer>

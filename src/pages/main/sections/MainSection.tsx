@@ -1,4 +1,4 @@
-import { DiscountCoupon, HealthCenter, ServiceRequest, Specialization, Visit } from 'api';
+import { DiscountCoupon, HealthCenter, Specialization, Visit } from 'api';
 import NavigationHelper from '../../../helpers/NavigationHelper';
 import {
   sectionContainer,
@@ -6,7 +6,7 @@ import {
 } from '../../../assets/jss/material-dashboard-react';
 import AppButton from '../../../components/base/app_button/AppButton';
 import Add from '@material-ui/icons/Add';
-import React, { useState } from 'react';
+import React from 'react';
 import UsersList from '../../../components/composite/users_list/UsersList';
 import HealthCentersList from '../../../components/composite/healthcenters_list/HealthCentersList';
 import SpecializationsList
@@ -14,8 +14,6 @@ import SpecializationsList
 import DiscountsList from 'src/components/composite/discounts_list/DiscountsList';
 import VisitsList from '../../../components/composite/visits_list/VisitsList';
 import ServerConfigsManageScreen from '../../serverconfigs_manage/ServerConfigsManageScreen';
-import ServiceRequestsList
-  from '../../../components/composite/service_requests_list/ServiceRequestsList';
 import AccountingsList from '../../../components/composite/accountings_list/AccountingsList';
 import LogsList from '../../../components/composite/logs_list/LogsList';
 import AdminsList from '../../../components/composite/admins_list/AdminsList';
@@ -26,7 +24,6 @@ import AccountantReportsList
 import SurveysList from '../../../components/composite/surveys_list/SurveysList';
 import AccountantYearlyReportList
   from '../../../components/composite/accountant_yearlyreport_list/AccountantYearlyReportList';
-import ReservationsList from '../../../components/composite/reservations_List/ReservationsList';
 import CallsList from '../../../components/composite/calls_list/CallsList';
 
 interface Props {
@@ -83,10 +80,6 @@ const getManager = (props, type: string): {render:()=>any, onAdd?:()=>void} => {
         render: () => <VisitsList onSelect={(visit: Visit) => { NavigationHelper.navigateTo('/visit', { visitId: visit._id }); }}/>,
         onAdd: () => NavigationHelper.navigateTo('/visit')
       };
-    case 'servicerequests':
-      return {
-        render: () => <ServiceRequestsList onSelect={(request: ServiceRequest) => { NavigationHelper.navigateTo('/servicerequest', { requestId: request._id }); }}/>
-      };
     case 'serverconfigs':
       return {
         render: () => <ServerConfigsManageScreen onSelect={() => { NavigationHelper.navigateTo('/serverconfigs'); }}/>
@@ -109,11 +102,6 @@ const getManager = (props, type: string): {render:()=>any, onAdd?:()=>void} => {
       return {
         render: () => <NotificationsList onSelect={(notification) => { NavigationHelper.navigateTo('/notification', { notificationId: notification._id }); }}/>,
         onAdd: () => NavigationHelper.navigateTo('/notification')
-      };
-    }
-    case 'reservations': {
-      return {
-        render: () => <ReservationsList onSelect={(reservation) => { NavigationHelper.navigateTo('/doctor-reservations', { doctorId: reservation.doctor._id, reservationId: reservation._id }); }}/>
       };
     }
     case 'calls': {
