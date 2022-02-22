@@ -98,10 +98,10 @@ export default function ManageView (props: Props) {
 
   const edit = () => {
     // @ts-ignore
-    const u : User = { ...user, sms_code: undefined, finalizable_visits: undefined, fcmtoken: undefined };
-    if (u.details && u.details.response_days) {
-      Object.keys(u.details.response_days).forEach((key) => {
-        u.details.response_days[key].forEach((responseTime: ResponseTime) => {
+    const u : User = { ...user, smsCode: undefined, finalizableVisits: undefined, fcmtoken: undefined };
+    if (u.details && u.details.responseDays) {
+      Object.keys(u.details.responseDays).forEach((key) => {
+        u.details.responseDays[key].forEach((responseTime: ResponseTime) => {
           if (responseTime.healthCenter) {
             responseTime.healthCenter = responseTime.healthCenter._id;
           }
@@ -211,8 +211,8 @@ export default function ManageView (props: Props) {
                                   clinics: [],
                                   hospitals: [],
                                   cut: 0,
-                                  nezam_pezeshki_code: 0,
-                                  response_days: { 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] },
+                                  nezamPezeshkiCode: 0,
+                                  responseDays: { 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] },
                                   reservationInfo: {
                                     enabled: false,
                                     phone: '',
@@ -266,7 +266,7 @@ export default function ManageView (props: Props) {
                   editableItem &&
                   <Row
                     placeholder="آخرین کد اس ام اس"
-                    value={user.sms_code || ''}
+                    value={user.smsCode || ''}
                     type={'number'}
                   />
                 }
@@ -476,8 +476,8 @@ const DoctorView = ({ user, setUser }) => {
 
         <Row
           placeholder="نظام پزشکی"
-          value={user.details.nezam_pezeshki_code}
-          onChange={(text) => { setUser({ ...user, details: { ...user.details, nezam_pezeshki_code: text } }); }}
+          value={user.details.nezamPezeshkiCode}
+          onChange={(text) => { setUser({ ...user, details: { ...user.details, nezamPezeshkiCode: text } }); }}
         />
 
         <Row
@@ -541,15 +541,15 @@ const DoctorView = ({ user, setUser }) => {
       <div style={{ flexDirection: 'column' }}>
         {
           ['6', '0', '1', '2', '3', '4', '5'].map((day) => {
-            return user.details.response_days[day].map((responseTime: ResponseTime) => {
+            return user.details.responseDays[day].map((responseTime: ResponseTime) => {
               return <WorkingDayRow
                 day={day}
                 responseTime={responseTime}
                 onDelete={() => {
                   const u: User = { ...user };
-                  const arr = u.details.response_days[String(day)];
+                  const arr = u.details.responseDays[String(day)];
                   arr.splice(arr.indexOf(responseTime), 1);
-                  u.details.response_days[String(day)] = arr;
+                  u.details.responseDays[String(day)] = arr;
                   setUser(u);
                 }}/>;
             });
@@ -712,7 +712,7 @@ const DoctorView = ({ user, setUser }) => {
                   onCreate={(responseTime, day) => {
                     setCreateResponseTimeDialogVisible(false);
                     const u: User = { ...user };
-                    u.details.response_days[String(day)] = [...u.details.response_days[String(day)], responseTime];
+                    u.details.responseDays[String(day)] = [...u.details.responseDays[String(day)], responseTime];
                     setUser(u);
                   }}
                 />
