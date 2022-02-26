@@ -89,15 +89,6 @@ const dashboardRoutes = [
     getPermission: () => store.getState().global.admin.privileges.visits.menuVisible
   },
   {
-    path: '/servicerequests',
-    name: 'درخواست های خدمات',
-    icon: LibraryBooks,
-    component: <MainSection type={'servicerequests'}/>,
-    layout: '/admin',
-    rtlName: 'درخواست های خدمات',
-    getPermission: () => store.getState().global.admin.privileges.serviceRequests.menuVisible
-  },
-  {
     path: '/accountings',
     name: 'حسابداری',
     icon: Money,
@@ -105,15 +96,6 @@ const dashboardRoutes = [
     layout: '/admin',
     rtlName: 'حسابداری',
     getPermission: () => store.getState().global.admin.privileges.transactions.menuVisible
-  },
-  {
-    path: '/reservations',
-    name: 'رزروها',
-    icon: Money,
-    component: <MainSection type={'reservations'}/>,
-    layout: '/admin',
-    rtlName: 'رزروها',
-    getPermission: () => store.getState().global.admin.privileges.reservations.menuVisible
   },
   {
     path: '/serverconfigs',

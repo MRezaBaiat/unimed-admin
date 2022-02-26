@@ -120,19 +120,19 @@ export default function ManageView (props: Props) {
                   value={String(coupon.perUserLimit)}
                   placeholder="محدودیت هر کاربر"
                   type={'number'}
-                  onChange={(text) => setCoupon({ ...coupon, per_user_limit: Number(text) })}/>
+                  onChange={(text) => setCoupon({ ...coupon, perUserLimit: Number(text) })}/>
 
                 <Row
                   value={String(coupon.totalUsageLimit)}
                   placeholder="محدودیت کلی"
                   type={'number'}
-                  onChange={(text) => setCoupon({ ...coupon, total_usage_limit: Number(text) })}/>
+                  onChange={(text) => setCoupon({ ...coupon, totalUsageLimit: Number(text) })}/>
 
                 <Row
                   value={String(days)}
                   placeholder="تعداد روزها"
                   type={'number'}
-                  onChange={(text) => { setCoupon({ ...coupon, end_date: coupon.startDate + (Number(text) * dayInMillisec) }); }}/>
+                  onChange={(text) => { setCoupon({ ...coupon, endDate: smartDate(smartDate(coupon.startDate).getTime() + (Number(text) * dayInMillisec)).toISOString() }); }}/>
 
                 <Row
                   value={new SmartDate(coupon.startDate).formatJalali()}
