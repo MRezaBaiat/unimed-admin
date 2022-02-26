@@ -12,6 +12,8 @@ COPY ./.eslintrc.json .
 
 RUN yarn install --production
 ARG CACHEBUST=1
+RUN yarn upgrade api
+
 
 RUN npm run build:release
 
